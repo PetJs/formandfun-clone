@@ -184,7 +184,7 @@ const Dashboard = () => {
                         autoPlay
                         loop
                         muted
-                        className=" w-[25vw] h-[60vh] object-cover rounded-xl"
+                        className=" w-[75vw] h-[45vh] xl:w-[25vw] xl:h-[60vh] object-cover rounded-xl"
                     />
                 ))}
             </section>
@@ -251,7 +251,7 @@ const Dashboard = () => {
 
             <section className='mb-12'>
                 <p>Expertise & Capabilities</p>
-                <div className=' flex gap-4 '>
+                <div className=' flex gap-4 overflow-x-hidden'>
                     {expertise.map((exp, idx) => (
                         <div
                             key={idx}
@@ -285,37 +285,36 @@ const Dashboard = () => {
 
             <section>
                 <h2 className='w-[75vw] text-8xl mb-8'>AN AWARD WINNING STUDIO</h2>
-
-                {awards.map((award) => (
-                    <div
-                        key={award.id}
-                        className='flex flex-col mb-4 '
-                    >
-                        <hr className='w-full mb-2 text-gray-300'/>
-                        <div className='flex justify-between '>
-                            <div className='flex justify-between w-[35vw]'>
-                                <p>{award.id}</p>
-                                <h3 className='text-2xl text-right'>{award.title}</h3>
-                            </div>
-                            <div className='flex gap-6 justify-between w-[50vw]'>
-                                <div className='flex flex-col'>
-                                    <p className='text-gray-300 text-sm'>Project</p>
-                                    <p className='text-sm max-w-sm break-words'>{award.project}</p>
+                <div className='flex gap-12 md:flex-col xl:flex-col overflow-x-hidden'>
+                    {awards.map((award) => (
+                        <div
+                            key={award.id}
+                            className='flex flex-col mb-4 '
+                        >
+                            <hr className='w-full mb-2 text-gray-300'/>
+                            <div className='flex flex-col md:flex-row xl:flex-row justify-between '>
+                                <div className='flex gap-10 items-center xl:justify-between md:justify-between md:w-[35vw] xl:w-[35vw]'>
+                                    <p>{award.id}</p>
+                                    <h3 className='text-2xl text-right'>{award.title}</h3>
                                 </div>
-                                <div className='flex flex-col '>
-                                    <p className='text-gray-300 text-sm'>Category</p>
-                                    <p className='text-sm max-w-xs break-words'>{award.category}</p>
-                                </div>
-                                <div className='flex flex-col'>
-                                    <p className='text-gray-300 text-sm'>Year</p>
-                                    <p className='text-sm'>{award.year}</p>
+                                <div className='flex flex-col xl:flex-row md:flex-row xl:gap-6 justify-between w-[50vw]'>
+                                    <div className='flex flex-col'>
+                                        <p className='text-gray-300 text-sm'>Project</p>
+                                        <p className='text-sm max-w-sm break-words'>{award.project}</p>
+                                    </div>
+                                    <div className='flex flex-col '>
+                                        <p className='text-gray-300 text-sm'>Category</p>
+                                        <p className='text-sm max-w-xs break-words'>{award.category}</p>
+                                    </div>
+                                    <div className='flex flex-col'>
+                                        <p className='text-gray-300 text-sm'>Year</p>
+                                        <p className='text-sm'>{award.year}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-
-                    </div>
-                ))}
+                    ))}
+                </div>
             </section>
 
         </div>

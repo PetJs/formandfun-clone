@@ -38,7 +38,7 @@ const Word: React.FC<WordProps> = ({ children, progress, range, isFirst, indentC
   );
 };
 
-export const MagicText: React.FC<MagicTextProps> = ({ text, indentClass = "ml-98" }) => {
+export const MagicText: React.FC<MagicTextProps> = ({ text, indentClass = "ml-40 md:ml-70 xl:ml-98" }) => {
   const container = useRef<HTMLParagraphElement | null>(null);
 
   const { scrollYProgress } = useScroll({
@@ -51,7 +51,7 @@ export const MagicText: React.FC<MagicTextProps> = ({ text, indentClass = "ml-98
   return (
     <p
       ref={container}
-      className="leading-snug gap-x-2 flex flex-wrap text-5xl "
+      className="leading-snug gap-x-2 flex flex-wrap text-4xl md:text-5xl xl:text-5xl "
     >
       {words.map((word, i) => {
         const start = i / words.length;

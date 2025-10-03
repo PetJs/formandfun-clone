@@ -25,12 +25,15 @@ const NavBar: React.FC<NavBarProps> = ({targetRef}) => {
 
 
     return(
-        <div className="flex justify-between items-center fixed top-0 w-full bg-white z-20 ">
+        <div className="flex justify-between items-center w-[100vw] fixed top-0 bg-white z-20 ">
             <div className="">
                 <img src={Logo} alt="logo.png" className="w-8 h-8" />
             </div>
-            <h2 ref={targetRef} className={`text-16px ${isVisble ? "" : "hidden"}`}>Form&Fun</h2>
-            <h2 className="text-[16px]">Creative Technology Studio</h2>
+            <div className="flex  justify-between hidden md:block xl:block">
+                <h2 ref={targetRef} className={`text-16px ${isVisble ? "" : "hidden"}`}>Form&Fun</h2>
+                <h2 className="text-[16px]">Creative Technology Studio</h2> 
+            </div>
+            
             <div className="flex gap-1 text-[16px] mr-4">
                 <nav>Studio</nav>
                 <nav>Contact</nav>
