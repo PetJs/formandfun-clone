@@ -3,112 +3,8 @@ import { MagicText } from './components/magicText'
 import { useEffect, useRef, useState } from 'react'
 import Lottie from "lottie-react"
 import formAndFun from "./assets/video/formandfun.json"
-import BlueCube from "./assets/images/bluecube.png"
-import PurpleCube from "./assets/images/purplecube.webp"
-import GreenCube from "./assets/images/greencube.webp"
+import { media, expertise, awards, gif } from './constants'
 
-const gif = [
-    "/bottle.mp4",
-    "/bottle.mp4",
-    "/bottle.mp4",
-    "/bottle.mp4",
-    "/bottle.mp4",
-    "/bottle.mp4",
-]
-
-const media = [
-    {
-        video: "/bottle.mp4",
-        title: "Bottle",
-        description: "A cool bottle",
-    },
-    {
-        video: "/bottle.mp4",
-        title: "Bottle",
-        description: "A cool bottle",
-    },
-    {
-        video: "/bottle.mp4",
-        title: "Bottle",
-        description: "A cool bottle",
-    },
-    {
-        video: "/bottle.mp4",
-        title: "Bottle",
-        description: "A cool bottle",
-    },
-]
-
-const awards = [
-    {
-        id: 0o1,
-        title: "Webby Awards",
-        project: "Powerade Mind Zone",
-        category: "AI, Immersive & Games",
-        year: "2025",
-    },
-    {
-        id: 0o2,
-        title: "Clio Awards-Gold",
-        project: "Oreo & Pacman Supermarcade",
-        category: "Interactive/Experimental",
-        year: "2025",
-    },
-]
-
-const expertise = [
-    {
-        image: BlueCube,
-        backgroundColor: "bg-blue-300",
-        bgColorHover: "hover:bg-blue-200",
-        title: "Technology",
-        leftList: [
-            "Spatial Computing (AR, VR, XR)",
-            "AI Tools & Experiences",
-            "Web Development",
-            "WebGL Experiences"
-        ],
-        rightList: [
-            "Web3/Blockchain",
-            "Game Development",
-            "Rapid Prototyping",
-        ]
-    },
-    {
-        image: PurpleCube,
-        backgroundColor: "bg-purple-300",
-        bgColorHover: "hover:bg-purple-200",
-        title: "Technology",
-        leftList: [
-            "Spatial Computing (AR, VR, XR)",
-            "AI Tools & Experiences",
-            "Web Development",
-            "WebGL Experiences"
-        ],
-        rightList: [
-            "Web3/Blockchain",
-            "Game Development",
-            "Rapid Prototyping",
-        ]
-    },
-    {
-        image: GreenCube,
-        backgroundColor: "bg-green-300",
-        bgColorHover: "hover:bg-green-200",
-        title: "Technology",
-        leftList: [
-            "Spatial Computing (AR, VR, XR)",
-            "AI Tools & Experiences",
-            "Web Development",
-            "WebGL Experiences"
-        ],
-        rightList: [
-            "Web3/Blockchain",
-            "Game Development",
-            "Rapid Prototyping",
-        ]
-    },
-]
 
 
 const Dashboard = () => {
@@ -173,7 +69,7 @@ const Dashboard = () => {
                 </div>
             )}
 
-            <div className={`transition-opacity duration-500 ${overlayVisible ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+            <div className={`transition-opacity space-y-6 duration-500 ${overlayVisible ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
                 <NavBar targetRef={studioRef}/>
 
                 <div className='flex justify-center items-center h-[60vh]' ref={studioRef}>
@@ -267,7 +163,16 @@ const Dashboard = () => {
                                 ${index === 3 ? "xl:col-span-2 " : ""}
                             `}
                         >
-                            <video src={item.video} autoPlay loop className='rounded-lg h-full object-cover'/>
+                            <video 
+                                src={item.video}  
+                                loop 
+                                onMouseEnter={(e) => e.currentTarget.play()}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.pause();
+                                    e.currentTarget.currentTime = 0;
+                                }}
+                                className='rounded-lg h-full object-cover'
+                            />
                             <div className='xl:group-hover:absolute xl:hidden xl:group-hover:block xl:group-hover:top-0 xl:group-hover:left-0 xl:group-hover:text-white p-2'>
                                 <p>{item.title}</p>
                                 <span>{item.description}</span>
@@ -285,8 +190,15 @@ const Dashboard = () => {
                                 className={` ${exp.bgColorHover} w-full rounded-lg`} 
                             >
                                 <div className='hover:scale-90 transform duration-800'>
-                                    <div className={`flex justify-center items-center ${exp.backgroundColor} rounded-lg h-84 mb-8`} >
-                                        <img src={exp.image} alt={exp.image} className='w-64 h-64' />
+                                    <div className={`flex justify-center items-center rounded-lg h-84 mb-8`} >
+                                        <video src={exp.image} 
+                                            loop 
+                                            onMouseEnter={(e) => e.currentTarget.play()}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.pause();
+                                                e.currentTarget.currentTime = 0;
+                                            }}
+                                        />
                                     </div>
                                     <div className='flex flex-col gap-3 '>
                                         <h3 className='text-4xl'>{exp.title}</h3>
