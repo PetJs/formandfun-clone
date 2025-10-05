@@ -3,7 +3,7 @@ import { MagicText } from './components/magicText'
 import { useEffect, useRef, useState } from 'react'
 import Lottie from "lottie-react"
 import formAndFun from "./assets/video/formandfun.json"
-import { media, expertise, awards, gif } from './constants'
+import { media, expertise, awards, gif, brands } from './constants'
 
 
 
@@ -15,6 +15,23 @@ const Dashboard = () => {
     const [scrollLeft, setScrollLeft] = useState(0)
     const ANIMATION_MS = 2000; // <-- tweak to match your Lottie duration (ms)
     const [overlayVisible, setOverlayVisible] = useState(true);
+    const [active, setActive] = useState(brands.map(() => 0));
+    const [hovered, setHovered] = useState<number | null>(null);
+
+    const duration = 3000;
+    useEffect(() => {
+        const intervals = brands.map((brand, i) => 
+            setInterval(() => {
+                setActive((prev) => {
+                    const copy = [...prev];
+                    copy[i] = (copy[i] + 1) % brand.logos.length;
+                    return copy;
+                })
+            }, duration)
+        )
+
+        return () => intervals.forEach((id) => clearInterval(id));
+    }, [brands, duration]);
 
     useEffect(() => {
     const t = window.setTimeout(() => setOverlayVisible(false), ANIMATION_MS);
@@ -83,7 +100,7 @@ const Dashboard = () => {
 
                 <section className='' >
                     <video 
-                        src="/sizzle.mp4"
+                        src="https://res.cloudinary.com/dm7vlpslq/video/upload/v1759604931/formandfunsizzle_k1h5n4.mp4"
                         autoPlay
                         muted
                         loop
@@ -189,7 +206,7 @@ const Dashboard = () => {
                                 key={idx}
                                 className={` ${exp.bgColorHover} w-full rounded-lg`} 
                             >
-                                <div className='hover:scale-90 transform duration-800'>
+                                <div className='hover:scale-90 flex flex-col gap-6 transform duration-800 p-2'>
                                     <div className={`flex justify-center items-center rounded-lg h-84 mb-8`} >
                                         <video src={exp.image} 
                                             loop 
@@ -198,6 +215,7 @@ const Dashboard = () => {
                                                 e.currentTarget.pause();
                                                 e.currentTarget.currentTime = 0;
                                             }}
+                                            className='mt-4'
                                         />
                                     </div>
                                     <div className='flex flex-col gap-3 '>
@@ -253,6 +271,44 @@ const Dashboard = () => {
                                 </div>
                             </div>
                         ))}
+                    </div>
+                </section>
+
+                <section>
+                    <h2 className='text-6xl font-semibold mb-6'>Trusted by the world's leading brands</h2>
+                    <div className='flex space-x-2 justify-between mb-6'>
+                        {brands.map((item, idx) => {
+                            const activeLogo = item.logos[active[idx]];
+                            const isHovered = hovered === idx;
+                            const bgColor = isHovered
+                                ? activeLogo.bg
+                                : "#f9f9f9";
+                            
+                            return (
+                                <div 
+                                    className={`relative overflow-hidden bg-gray-50 rounded-lg flex justify-center transition-all ease-in-out duration-700 space-x-4 items-center w-[25vw] h-[35vh]`} 
+                                    style={{ backgroundColor: bgColor }}
+                                    onMouseEnter={() => setHovered(idx)}
+                                    onMouseLeave={() => setHovered(null)}
+                                    key={idx}
+                                >
+                                    <div className="absolute top-0 left-0 w-full transition-transform duration-700 ease-in-out"
+                                        style={{
+                                            height: `${item.logos.length * 100}%`,
+                                            transform: `translateY(-${active[idx] * (100 / item.logos.length)}%)`,
+                                        }}
+                                    >
+                                        {item.logos.map((logo, index) => (
+                                            <div key={index} className="w-full h-[35vh] flex justify-center items-center p-6 ">
+                                                <img 
+                                                    src={isHovered ? logo.white : logo.black} alt="" className='transition-transform duration-700' 
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )
+                        })}
                     </div>
                 </section>
             </div>
