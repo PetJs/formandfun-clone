@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import Lottie from "lottie-react"
 import formAndFun from "./assets/video/formandfun.json"
 import { media, expertise, awards, gif, brands } from './constants'
+import Logo from "./assets/logo/formandfun-logo.png"
 
 
 
@@ -86,14 +87,14 @@ const Dashboard = () => {
                 </div>
             )}
 
-            <div className={`transition-opacity space-y-6 duration-500 ${overlayVisible ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+            <div className={`transition-opacity space-y-12 duration-500 ${overlayVisible ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
                 <NavBar targetRef={studioRef}/>
 
-                <div className='flex justify-center items-center h-[60vh]' ref={studioRef}>
+                <div className='flex justify-center items-center xl:h-[60vh] h-[20vh] w-full' ref={studioRef}>
                     <Lottie 
                         animationData={formAndFun}
                         loop={false}
-                        className='w-[50vw]'
+                        className='xl:w-[50vw] w-[40vw]'
                     />
                 </div>
                 
@@ -124,7 +125,7 @@ const Dashboard = () => {
                             autoPlay
                             loop
                             muted
-                            className=" w-[75vw] h-[45vh] xl:w-[25vw] xl:h-[60vh] object-cover rounded-xl"
+                            className="w-[75vw] h-[45vh] xl:w-[25vw] xl:h-[60vh] object-cover rounded-xl"
                         />
                     ))}
                 </section>
@@ -200,14 +201,14 @@ const Dashboard = () => {
 
                 <section className='mb-12'>
                     <p>Expertise & Capabilities</p>
-                    <div className=' flex gap-4 overflow-x-hidden'>
+                    <div className=' flex gap-4 overflow-x-auto hide-scrollbar scroll-smooth snap-x snap-mandatory'>
                         {expertise.map((exp, idx) => (
                             <div
                                 key={idx}
                                 className={` ${exp.bgColorHover} w-full rounded-lg`} 
                             >
-                                <div className='hover:scale-90 flex flex-col gap-6 transform duration-800 p-2'>
-                                    <div className={`flex justify-center items-center rounded-lg h-84 mb-8`} >
+                                <div className='hover:scale-90 flex flex-col gap-24 transform duration-800 p-2 xl:gap-12'>
+                                    <div className={`flex justify-center items-center rounded-lg h-84 sm:w-[85vw] xl:w-full  mb-8`} >
                                         <video src={exp.image} 
                                             loop 
                                             onMouseEnter={(e) => e.currentTarget.play()}
@@ -241,8 +242,8 @@ const Dashboard = () => {
                 </section>
 
                 <section>
-                    <h2 className='w-[75vw] text-8xl mb-8'>AN AWARD WINNING STUDIO</h2>
-                    <div className='flex gap-12 md:flex-col xl:flex-col overflow-x-hidden'>
+                    <h2 className='w-[75vw] xl:text-8xl text-4xl mb-8'>AN AWARD WINNING STUDIO</h2>
+                    <div className='flex gap-12 md:flex-col xl:flex-col overflow-x-auto hide-scrollbar scroll-smooth snap-x snap-mandatory'>
                         {awards.map((award) => (
                             <div
                                 key={award.id}
@@ -275,7 +276,7 @@ const Dashboard = () => {
                 </section>
 
                 <section>
-                    <h2 className='text-6xl font-semibold mb-6'>Trusted by the world's leading brands</h2>
+                    <h2 className='text-2xl xl:text-6xl font-semibold w-[75vw] mb-6'>Trusted by the world's leading brands</h2>
                     <div className='flex space-x-2 justify-between mb-6'>
                         {brands.map((item, idx) => {
                             const activeLogo = item.logos[active[idx]];
@@ -286,7 +287,7 @@ const Dashboard = () => {
                             
                             return (
                                 <div 
-                                    className={`relative overflow-hidden bg-gray-50 rounded-lg flex justify-center transition-all ease-in-out duration-700 space-x-4 items-center w-[25vw] h-[35vh]`} 
+                                    className={`relative overflow-hidden bg-gray-50 rounded-lg flex justify-center transition-all ease-in-out duration-700 space-x-4 items-center xl:w-[25vw] xl:h-[35vh] w-[40vw] h-[15vh]`} 
                                     style={{ backgroundColor: bgColor }}
                                     onMouseEnter={() => setHovered(idx)}
                                     onMouseLeave={() => setHovered(null)}
@@ -299,7 +300,7 @@ const Dashboard = () => {
                                         }}
                                     >
                                         {item.logos.map((logo, index) => (
-                                            <div key={index} className="w-full h-[35vh] flex justify-center items-center p-6 ">
+                                            <div key={index} className="w-full xl:h-[35vh] h-[15vh] flex justify-center items-center  ">
                                                 <img 
                                                     src={isHovered ? logo.white : logo.black} alt="" className='transition-transform duration-700' 
                                                 />
@@ -311,6 +312,51 @@ const Dashboard = () => {
                         })}
                     </div>
                 </section>
+
+                <section className='flex justify-between'>
+                    <div>
+                        <img src={Logo} alt="" className='w-16 h-16' />
+                    </div>
+                    <div className='flex xl:flex-row flex-col xl:gap-24 gap-6 mr-24 xl:mr-36'>
+                        <div className='flex xl:gap-36 gap-12'>
+                            <div className='flex flex-col gap-4'>
+                                <p className='text-gray-400'>Menu</p>
+                                <ul className='flex flex-col gap-2'>
+                                    <li>Studio</li>
+                                    <li>Contact</li>
+                                    <li>Work</li>
+                                </ul>
+                            </div>
+                            
+                            <div className=''>
+                                <p className='text-gray-400'>Social</p>
+                                <ul className=''>
+                                    <li>Instagram</li>
+                                    <li>Linkedin</li>
+                                    <li>Behance</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className='flex flex-col gap-6'>
+                            <div className='flex flex-col gap-4'>
+                                <p className='text-gray-400'>Business enquiries</p>
+                                <span>hi@formandfun.co</span>
+                            </div>
+                            <div className='flex flex-col gap-4'>
+                                <p className='text-gray-400'>Join our team</p>
+                                <span>apply@formandfun.co</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div >
+                    <Lottie 
+                        animationData={formAndFun}
+                        loop={false}
+                        className='w-full'
+                    />
+                </div>
             </div>
         </div>
     )
