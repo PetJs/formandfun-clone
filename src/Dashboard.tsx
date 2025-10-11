@@ -3,6 +3,7 @@ import { MagicText } from './components/magicText'
 import { useEffect, useRef, useState } from 'react'
 import Lottie from "lottie-react"
 import formAndFun from "./assets/video/formandfun.json"
+import FormAndFun from "./assets/images/FormFun.svg"
 import { media, expertise, awards, gif, brands } from './constants'
 import Logo from "./assets/logo/formandfun-logo.png"
 
@@ -75,6 +76,35 @@ const Dashboard = () => {
         const walk = (x - startX) * 1.5; //scroll-fast
         containerRef.current.scrollLeft = scrollLeft - walk;
     }
+
+    const [transformX, setTransformX] = useState(0);
+    const trackRef = useRef<HTMLDivElement>(null);
+    
+    const SPEED_FACTOR = 0.5; 
+
+    useEffect(() => {
+        // Function to update the translation based on scroll position
+        const handleScroll = () => {
+            // Get the current vertical scroll position
+            const scrollY = window.scrollY || document.documentElement.scrollTop;
+            
+            // Calculate the new translation value. 
+            // We use the negative scroll position multiplied by the speed factor 
+            // to achieve the desired effect relative to the content's position on the screen.
+            setTransformX(scrollY * SPEED_FACTOR);
+        };
+
+        // Attach the scroll listener
+        window.addEventListener('scroll', handleScroll);
+
+        // Cleanup the event listener when the component unmounts
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+
+    const contentDuplicates = Array(15).fill(0);
     
 
     return(
@@ -170,7 +200,7 @@ const Dashboard = () => {
                     </div>    
                 </section>        
 
-                <section className='grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-2'>
+                <section className='grid grid-cols-1 md:grid-cols-1 xl:grid-cols-3 gap-2'>
                     {media.map((item, index) => (
                         <div 
                             key={index}
@@ -189,14 +219,36 @@ const Dashboard = () => {
                                     e.currentTarget.pause();
                                     e.currentTarget.currentTime = 0;
                                 }}
-                                className='rounded-lg h-full object-cover'
+                                className='rounded-lg h-full sm:h-[50vh] object-cover'
                             />
-                            <div className='xl:group-hover:absolute xl:hidden xl:group-hover:block xl:group-hover:top-0 xl:group-hover:left-0 xl:group-hover:text-white p-2'>
-                                <p>{item.title}</p>
-                                <span>{item.description}</span>
+                            <div className='xl:group-hover:absolute xl:hidden xl:group-hover:block xl:group-hover:top-0 xl:group-hover:left-0 xl:group-hover:text-white xl:group-over:flex xl:group-hover:justify-between p-2'>
+                                <p className='font-semibold'>{item.title}</p>
+                                <span className='font-medium'>{item.description}</span>
+                                <span className='text-xl hidden xl:group-hover:block'>+</span>
                             </div>
                         </div>
                     ))} 
+                </section>
+
+                <section className='overflow-x-hidden'>
+                    <div ref={trackRef} className=" flex gap-12"
+                        style={{ 
+                            transform: `translateX(-${transformX}px)`,
+                            transition: "1s linear",
+                            width: 'max-content',
+                        }}
+                    >
+                        {contentDuplicates.map((_, idx) => (
+                            <div key={idx} className='flex  gap-12 items-center flex-shrink-0'>
+                                <img src={FormAndFun} alt="formFun.svg" className='w-[30vw]' />
+                                <div className='text-center flex flex-col text-[10px] xl:text-[16px]'>
+                                    <p>CREATIVE</p>
+                                    <p>TECHNOLOGY</p>
+                                    <p>STUDIO</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </section>
 
                 <section className='mb-12'>
