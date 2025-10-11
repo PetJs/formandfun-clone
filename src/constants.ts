@@ -138,23 +138,23 @@ export const expertise = [
 export const media = [
     {
         video: "https://res.cloudinary.com/dm7vlpslq/video/upload/v1759642096/bheeicdi21w0hkxyqiby6vxovghp64qh2wan_qwmt7l.mp4",
-        title: "Bottle",
-        description: "A cool bottle",
+        title: "Oreo X Pacman",
+        description: "AR Experience",
     },
     {
         video: "https://res.cloudinary.com/dm7vlpslq/video/upload/v1759642676/YThAIwoXKB_576p_1744824072_ccmg6f.mp4",
-        title: "Bottle",
-        description: "A cool bottle",
+        title: "DoorDash",
+        description: "Summer of Dashpass",
     },
     {
         video: "https://res.cloudinary.com/dm7vlpslq/video/upload/v1759642080/bheeicea8cwvkf21vcnbg8jhx3wo0wyb42im_q9yvuz.mp4",
-        title: "Bottle",
+        title: "Widlet",
         description: "A cool bottle",
     },
     {
         video: "https://res.cloudinary.com/dm7vlpslq/video/upload/v1759642089/bheeicea3wowr2ifyqckn5737cnu42mewpr1_a8wqzo.mp4",
-        title: "Bottle",
-        description: "A cool bottle",
+        title: "Powerade Mindzone",
+        description: "VR Experience",
     },
 ]
 
